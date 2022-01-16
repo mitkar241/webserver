@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	<body style="background-color:orange;text-align:center">
+		<h1 style="text-align: center; background-color: rgb(20, 20, 109); color: white; width: 50%; margin: 0 auto;">JSON Schema Changer</h1>
+		<br><br>
+
+		<form onsubmit="return setApiInput(this)" style="text-align: center; display: inline-block; background-color: #ddd; width: 30%; margin: 0 auto;">
+			<label for="jsonInput">JSON modifier</label>
+			<br>
+			<textarea id="jsonInput" name="jsonInput" rows="20" cols="50">{
+    "key1" : "value1",
+    "key2" : "value2",
+    "key3" : "value3"
+}</textarea>
+			<br><br>
+			<input type="submit" value="Submit">
+			<br><br>
+		</form>
+
+		<form style="text-align: center; display: inline-block; background-color: #ddd; width: 30%; margin: 0 auto;">
+			<label for="jsonOutput">JSON modifier</label>
+			<br>
+			<textarea id="jsonOutput" name="jsonOutput" rows="20" cols="50"></textarea>
+			<br><br>
+		</form>
+
+		<br><br>
+		<p id="jsonLogFile" style="text-align: center; background-color: brown; color: white; width: 20%; margin: 0 auto;">find out</p>
+		
+		<br><br>
+		<p style="text-align: center; background-color: black; color: white; width: 50%; margin: 0 auto;">Click the "Submit" button and the JSON data will be modified</p>
+		<script>
+			function setApiInput(form) {
+			  //alert(form.jsonInput.value)
+			  upload(form.jsonInput.value)
+			  return false;
+			}
+			
+			function upload(jsonInput) {
+			    fetch('http://localhost:8001/getJsonLogFile')
+			    .then(res => res.text())
+			    .then(text => {
+					//alert(text);
+					$('#jsonLogFile').text(text);
+					const jsonobj = JSON.parse(jsonInput);
+					const myJSON = JSON.stringify(jsonobj);
+					$('#jsonOutput').val(myJSON)
+				}).catch(error => console.log('Authorization failed : ' + error.message));
+			}
+		</script>
+	</body>
+</html>

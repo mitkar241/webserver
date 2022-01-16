@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	<body style="background-color:orange;text-align:center">
+		<h1 style="text-align: center; background-color: rgb(20, 20, 109); color: white; width: 50%; margin: 0 auto;">FILE READER</h1>
+		<br><br>
+
+		<form onsubmit="return getFileContent(this)" style="text-align: center; display: inline-block; background-color: #ddd; width: 50%; margin: 0 auto;">
+			<label for="fname">File Name</label>
+			<input type="text" id="fname" name="fname">
+
+			<label for="fileContent">(e.g. abc.txt)</label>
+			<br>
+			<textarea id="fileContent" name="fileContent" rows="20" cols="50"></textarea>
+			<br><br>
+			<input type="submit" value="Submit">
+			<br><br>
+		</form>
+
+		<br><br>
+		<p id="jsonLogFile" style="text-align: center; background-color: brown; color: white; width: 20%; margin: 0 auto;">find out</p>
+		
+		<br><br>
+		<p style="text-align: center; background-color: black; color: white; width: 50%; margin: 0 auto;">Click the "Submit" button and the JSON data will be modified</p>
+		<script>
+			function getFileContent(form) {
+			  //alert(form.jsonInput.value)
+			  var filename = form.fname.value
+			  let todo = {"fname" : filename}
+			  fetch('http://localhost:8001/readJsonLogFile', {
+					method: 'POST',
+					body: JSON.stringify(todo),
+					headers: { 'Content-Type': 'application/json' }
+				}).then(res => res.text())
+				.then(text => {
+					$('#fileContent').val(text)
+				}).catch(err => console.log(err))
+			  return false;
+			}
+		</script>
+	</body>
+</html>
