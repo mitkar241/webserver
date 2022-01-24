@@ -1,0 +1,212 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple example NodeJS API project to maintain credit card details",
+        "version": "1.0.0",
+        "title": "Credit Details API",
+        "contact": {
+            "email": "raktimhalder241@gmail.com"
+        }
+    },
+    "schemes": ["http"],
+    "host": "localhost:5000",
+    "basePath": "/api",
+    "paths" : {
+        "/list" : {
+            "get" : {
+                "summary" : "Credit Card Details",
+                "description": "Get all the credit card details",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CCardResObj"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResObj"
+                        }
+                    }
+                }
+            }
+        },
+        "/register" : {
+            "post" : {
+                "summary" : "Credit Card Regestration",
+                "description": "Add credit card details",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "credit card object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ccd" : {
+                                    "type": "object",
+                                    "$ref": "#/definitions/CCardDetObj"
+                                } 
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CCardResObj"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResObj"
+                        }
+                    }
+                }
+            }
+        },
+        "/update/{id}" : {
+            "put" : {
+                "summary" : "Credit Card Updation",
+                "description": "Update credit card details",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "credit card id that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "credit card details object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "ccd" : {
+                                    "type": "object",
+                                    "$ref": "#/definitions/CCardDetObj"
+                                } 
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CCardResObj"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResObj"
+                        }
+                    }
+                }
+            }
+        },
+        "/deregister/{id}" : {
+            "delete" : {
+                "summary" : "Credit Card Deregistration",
+                "description": "Delete credit card details",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "credit card id that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/CCardResObj"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResObj"
+                        }
+                    }
+                }
+            }
+        }
+    }, 
+    "definitions": {
+        "CCardResObj": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "uid": {
+                    "type": "string"
+                },
+                "credit_card_number": {
+                    "type": "string"
+                },
+                "credit_card_expiry_date": {
+                    "type": "string"
+                },
+                "credit_card_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "CCardDetObj": {
+            "type": "object",
+            "properties": {
+                "credit_card_number": {
+                    "type": "string"
+                },
+                "credit_card_expiry_date": {
+                    "type": "string"
+                },
+                "credit_card_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "InvalidResObj": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+
+        }
+    }
+}
