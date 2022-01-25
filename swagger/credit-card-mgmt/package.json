@@ -1,16 +1,20 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "api for todoapp",
+  "description": "api for credit card details",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon ./server.js localhost 5000",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "app": "nodemon ./server.js",
+    "test": "bash ./test/test_https_endpoints.sh"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "js-yaml": "^4.1.0",
+    "log4js": "^6.4.1",
     "swagger-jsdoc": "^4.3.2",
     "swagger-ui-express": "^4.3.0",
     "uuid": "^8.3.2"

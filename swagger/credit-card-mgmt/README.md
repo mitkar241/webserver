@@ -2,5 +2,6 @@
 ---
 ```bash
 npm install
-npm run dev
+npm run app
+npm run test
 ```

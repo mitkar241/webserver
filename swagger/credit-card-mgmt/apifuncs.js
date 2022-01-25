@@ -1,4 +1,5 @@
 const model = require("./model.js");
+const utils = require("./utils.js");
 
 /*
 UUID = Universally Unique Identifiers
@@ -11,25 +12,27 @@ const {
   v4: uuidv4,
 } = require('uuid');
 
+const logger = utils.getLogger("func")
+
 /* Add init cache func */
-function initCcd() {
-  console.log(`Server listening on the port : ${model.API_PORT}`);
+function initCcd(port) {
+  logger.info(`Server listening on the port : ${port}`);
   /* Provide some configs as well */
 }
 
 function defaultCcd(req, res) {
-  console.log({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"]})
+  logger.info({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"]})
   res.send(`<h1>API Running on port ${model.API_PORT}</h1>`);
   /* Provide Usages as well */
 }
 
 function listCcd(req, res) {
-  console.log({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"]})
+  logger.info({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"]})
   res.json(model.CCARD_DET_CACHE);
 }
 
 function regCcd(req, res) {
-  console.log({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"]})
+  logger.info({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"]})
   const ccd = req.body.ccd;
   model.CURRENTID = model.CURRENTID + 1
   ccd.id = model.CURRENTID
@@ -39,14 +42,14 @@ function regCcd(req, res) {
 }
 
 function deregCcd(req, res) {
-  console.log({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"], "id":req.params.id})
+  logger.info({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"], "id":req.params.id})
   ignoreId = parseInt(req.params.id);
   delete model.CCARD_DET_CACHE[ignoreId]
   res.json(model.CCARD_DET_CACHE);
 }
 
 function updateCcd(req, res) {
-  console.log({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"], "id":req.params.id})
+  logger.info({"msg":"endpoint called", "method":req["method"], "endpoint":req["url"], "id":req.params.id})
   targetId = parseInt(req.params.id);
   const ccdToUpdate = req.body.ccd;
   if (model.CCARD_DET_CACHE.hasOwnProperty(targetId) == true) {

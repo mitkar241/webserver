@@ -1,0 +1,21 @@
+# config.yml
+#
+
+--- # modifiable by user
+
+# method to be used by API server
+method: 'https'
+
+# starting ID of the CCD entries
+id0: 1000
+# suggested not to be modified by user
+methodconf:
+  app:
+    port: 8000
+  http:
+    port: 8080
+  https:
+    port: 8443
+    sslcert:
+      cert: 'sslcert/mitkar.io.crt'
+      key: 'sslcert/mitkar.io.key'

@@ -1,5 +1,6 @@
-// N.B. - YAML
-// need logger package as well
+// mongodb for persistence
+// systemd
+// docker
 
 /*
 raktim@controller:~$ curl https://random-data-api.com/api/business_credit_card/random_card | jq
@@ -60,7 +61,7 @@ let CCARD_DET_CACHE = {
 };
 
 let CURRENTID = 1004 // need to be dynamic
-const API_PORT = 5000;
+const API_PORT = 8443;
 
 module.exports ={
   CCARD_DET_CACHE,CURRENTID,API_PORT,CREDIT_STRUCT
