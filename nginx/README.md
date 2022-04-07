@@ -1,5 +1,20 @@
 # nginx
 ---
+
+- [nginx understanding - devopscurry](https://medium.com/devopscurry/what-is-nginx-understanding-the-basics-of-nginx-in-2021-f8ee0f3d3d54)
+
+### nginx use case
+---
+- basic load balancer
+  - content cache
+  - ssl termination
+- reverse proxy
+- web server
+  - serve content from disk
+- rate limiting
+- basic authentication
+- 7 metrics
+
 ### Installation
 ---
 ```bash
